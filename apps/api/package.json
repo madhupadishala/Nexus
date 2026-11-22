@@ -1,0 +1,30 @@
+{
+  "name": "@nexus/api",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "eslint . --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@nexus/core": "workspace:*",
+    "@nexus/auth": "workspace:*",
+    "@nexus/agent-runtime": "workspace:*",
+    "@nexus/adapters": "workspace:*",
+    "@nexus/agents": "workspace:*",
+    "fastify": "latest",
+    "zod": "latest",
+    "pino": "latest",
+    "pino-pretty": "latest"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "eslint": "latest",
+    "tsx": "latest",
+    "@types/node": "latest"
+  },
+  "type": "module"
+}

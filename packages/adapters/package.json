@@ -1,0 +1,22 @@
+{
+  "name": "@nexus/adapters",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint . --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@nexus/core": "workspace:*",
+    "@nexus/auth": "workspace:*",
+    "@nexus/agent-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "eslint": "latest"
+  },
+  "type": "module"
+}
