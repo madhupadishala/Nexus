@@ -1,0 +1,263 @@
+{
+  "testCases": [
+    {
+      "id": "screen-001",
+      "name": "Clear ICSR with drug and adverse event",
+      "description": "Article clearly describes a drug and associated adverse event - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111111",
+        "articleTitle": "Serious hepatotoxicity associated with DrugX in clinical trial",
+        "articleAbstract": "We report a case of severe drug-induced liver injury in a 45-year-old male patient receiving DrugX (100mg daily) for rheumatoid arthritis. The patient developed jaundice and elevated transaminases after 3 months of treatment. DrugX was discontinued and liver function normalized within 4 weeks.",
+        "articleFullText": "Full text details...",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Article describes a serious adverse event (hepatotoxicity) associated with DrugX in a identifiable patient with temporal relationship and dechallenge positive",
+        "extractedData": {
+          "drugs": [{ "name": "DrugX", "confidence": 0.95 }],
+          "events": [{ "term": "hepatotoxicity", "meddraCode": "10019851", "confidence": 0.9 }],
+          "patientInfo": { "age": 45, "gender": "male" }
+        },
+        "confidence": 0.92
+      },
+      "tags": ["hepatotoxicity", "dechallenge-positive", "serious", "identifiable-patient"]
+    },
+    {
+      "id": "screen-002",
+      "name": "Pregnancy exposure with normal outcome",
+      "description": "Pregnancy exposure registry data with normal outcome - should INCLUDE per ICH E2D",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111112",
+        "articleTitle": "Pregnancy outcomes following DrugY exposure: a registry study",
+        "articleAbstract": "Prospective registry of 250 pregnant women exposed to DrugY during first trimester. No increase in congenital anomalies compared to background rate. 240 live births, 5 spontaneous abortions, 5 elective terminations.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Pregnancy exposure with outcome data constitutes reportable ICSR per ICH E2D and GVP Module VI regardless of outcome normality",
+        "extractedData": {
+          "drugs": [{ "name": "DrugY", "confidence": 0.9 }],
+          "events": [],
+          "patientInfo": { "age": null, "gender": "female" }
+        },
+        "confidence": 0.88
+      },
+      "tags": ["pregnancy", "registry", "first-trimester", "normal-outcome"]
+    },
+    {
+      "id": "screen-003",
+      "name": "Occupational exposure without adverse event",
+      "description": "Occupational exposure study without reported adverse events - should EXCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111113",
+        "articleTitle": "Occupational exposure to DrugZ in manufacturing workers: air monitoring study",
+        "articleAbstract": "Air monitoring in pharmaceutical manufacturing facility detected trace DrugZ levels below occupational exposure limits. No health complaints reported among 50 workers over 2-year period.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "EXCLUDE",
+        "rationale": "Occupational exposure without any reported adverse health effect or clinical outcome does not constitute an ICSR",
+        "extractedData": {
+          "drugs": [{ "name": "DrugZ", "confidence": 0.7 }],
+          "events": [],
+          "patientInfo": {}
+        },
+        "confidence": 0.85
+      },
+      "tags": ["occupational-exposure", "no-adverse-event", "air-monitoring"]
+    },
+    {
+      "id": "screen-004",
+      "name": "Overdose with serious outcome",
+      "description": "Intentional overdose with serious clinical outcome - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111114",
+        "articleTitle": "Fatal DrugA overdose: case report and literature review",
+        "articleAbstract": "A 28-year-old female presented after intentional ingestion of 50 tablets of DrugA (500mg each). Developed seizures, metabolic acidosis, and multi-organ failure. Died 48 hours post-admission despite intensive care.",
+        "articleFullText": "Detailed clinical course...",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Overdose with fatal outcome is a serious ICSR requiring expedited reporting per regulatory requirements",
+        "extractedData": {
+          "drugs": [{ "name": "DrugA", "confidence": 0.98 }],
+          "events": [
+            { "term": "overdose", "meddraCode": "10031128", "confidence": 0.95 },
+            { "term": "seizure", "meddraCode": "10039906", "confidence": 0.9 },
+            { "term": "multi-organ failure", "meddraCode": "10028132", "confidence": 0.85 }
+          ],
+          "patientInfo": { "age": 28, "gender": "female" }
+        },
+        "confidence": 0.95
+      },
+      "tags": ["overdose", "fatal", "intentional", "serious", "expedited"]
+    },
+    {
+      "id": "screen-005",
+      "name": "Lack of efficacy report",
+      "description": "Report of suspected lack of efficacy - should INCLUDE per GVP Module VI",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111115",
+        "articleTitle": "Treatment failure with DrugB in refractory epilepsy: case series",
+        "articleAbstract": "Three patients with refractory epilepsy experienced breakthrough seizures after switching to generic DrugB. Seizure control restored after switching back to brand-name product. Therapeutic drug monitoring showed subtherapeutic levels with generic.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Suspected lack of efficacy with clinical consequences (breakthrough seizures) is reportable per GVP Module VI",
+        "extractedData": {
+          "drugs": [{ "name": "DrugB", "confidence": 0.9 }],
+          "events": [
+            { "term": "therapeutic failure", "meddraCode": "10044241", "confidence": 0.85 },
+            { "term": "breakthrough seizure", "meddraCode": "10006598", "confidence": 0.9 }
+          ],
+          "patientInfo": {}
+        },
+        "confidence": 0.88
+      },
+      "tags": ["lack-of-efficacy", "therapeutic-failure", "generic-switch", "epilepsy"]
+    },
+    {
+      "id": "screen-006",
+      "name": "Medication error with harm",
+      "description": "Dispensing error leading to patient harm - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111116",
+        "articleTitle": "Dispensing error: DrugC 10mg dispensed instead of 1mg causing severe hypotension",
+        "articleAbstract": "A 72-year-old patient received DrugC 10mg tablets instead of prescribed 1mg due to pharmacy dispensing error. Developed severe symptomatic hypotension requiring hospitalization. Recovered after 3 days.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Medication error resulting in serious adverse event (hypotension requiring hospitalization) constitutes an ICSR",
+        "extractedData": {
+          "drugs": [{ "name": "DrugC", "confidence": 0.95 }],
+          "events": [
+            { "term": "medication error", "meddraCode": "10027011", "confidence": 0.95 },
+            { "term": "hypotension", "meddraCode": "10021097", "confidence": 0.9 }
+          ],
+          "patientInfo": { "age": 72, "gender": null }
+        },
+        "confidence": 0.92
+      },
+      "tags": ["medication-error", "dispensing-error", "wrong-dose", "hospitalization"]
+    },
+    {
+      "id": "screen-007",
+      "name": "Counterfeit drug report",
+      "description": "Counterfeit product identified with adverse events - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111117",
+        "articleTitle": "Counterfeit DrugD containing toxic contaminant causes renal failure",
+        "articleAbstract": "Investigation of counterfeit DrugD tablets found to contain diethylene glycol. Five patients developed acute renal failure after consuming counterfeit product. Two deaths reported.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Counterfeit drug with serious adverse outcomes (renal failure, death) is a critical safety signal requiring immediate reporting",
+        "extractedData": {
+          "drugs": [{ "name": "DrugD", "confidence": 0.9 }],
+          "events": [
+            { "term": "counterfeit drug", "meddraCode": "10066769", "confidence": 0.95 },
+            { "term": "renal failure", "meddraCode": "10038435", "confidence": 0.9 },
+            { "term": "death", "meddraCode": "10011906", "confidence": 0.98 }
+          ],
+          "patientInfo": {}
+        },
+        "confidence": 0.95
+      },
+      "tags": ["counterfeit", "diethylene-glycol", "renal-failure", "death", "quality-defect"]
+    },
+    {
+      "id": "screen-008",
+      "name": "Elderly patient with drug interaction",
+      "description": "Elderly patient with polypharmacy and suspected drug interaction - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111118",
+        "articleTitle": "Warfarin-DrugE interaction causing major bleeding in elderly patient",
+        "articleAbstract": "An 82-year-old patient on chronic warfarin therapy was prescribed DrugE for infection. INR increased from 2.5 to 8.2 within 5 days. Patient presented with gastrointestinal bleeding requiring transfusion. DrugE discontinued, INR normalized.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Drug-drug interaction (Warfarin-DrugE) leading to serious hemorrhage in elderly patient with polypharmacy is a reportable ICSR",
+        "extractedData": {
+          "drugs": [
+            { "name": "Warfarin", "confidence": 0.95 },
+            { "name": "DrugE", "confidence": 0.9 }
+          ],
+          "events": [
+            { "term": "drug interaction", "meddraCode": "10013683", "confidence": 0.9 },
+            { "term": "gastrointestinal hemorrhage", "meddraCode": "10017955", "confidence": 0.95 },
+            { "term": "INR increased", "meddraCode": "10021556", "confidence": 0.85 }
+          ],
+          "patientInfo": { "age": 82, "gender": null }
+        },
+        "confidence": 0.9
+      },
+      "tags": ["drug-interaction", "warfarin", "elderly", "bleeding", "polypharmacy"]
+    },
+    {
+      "id": "screen-009",
+      "name": "Pediatric exposure via breast milk",
+      "description": "Infant exposure through breast milk with adverse event - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111119",
+        "articleTitle": "Neonatal thrombocytopenia associated with maternal DrugF exposure via breast milk",
+        "articleAbstract": "A 3-week-old exclusively breastfed infant developed severe thrombocytopenia (platelets 15,000). Mother was taking DrugF 200mg daily for autoimmune condition. Infant platelet count normalized after mother discontinued DrugF and breastfeeding paused.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Adverse event in infant exposed via breast milk is reportable per ICH E2D as exposure during lactation with clinical consequence",
+        "extractedData": {
+          "drugs": [{ "name": "DrugF", "confidence": 0.9 }],
+          "events": [
+            { "term": "thrombocytopenia", "meddraCode": "10043554", "confidence": 0.95 },
+            { "term": "exposure via breast milk", "meddraCode": "10015725", "confidence": 0.9 }
+          ],
+          "patientInfo": { "age": 0, "gender": null }
+        },
+        "confidence": 0.88
+      },
+      "tags": ["breast-milk", "lactation", "pediatric", "thrombocytopenia", "dechallenge-positive"]
+    },
+    {
+      "id": "screen-010",
+      "name": "Congenital anomaly report",
+      "description": "Congenital anomaly following first trimester exposure - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111120",
+        "articleTitle": "Congenital heart defect following first-trimester DrugG exposure: case report",
+        "articleAbstract": "A newborn diagnosed with ventricular septal defect. Mother took DrugG 50mg daily during weeks 4-8 of pregnancy for chronic condition. No family history of congenital heart defects. Genetic testing negative.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Congenital anomaly following first-trimester drug exposure is a serious ICSR requiring expedited reporting per regulatory requirements",
+        "extractedData": {
+          "drugs": [{ "name": "DrugG", "confidence": 0.85 }],
+          "events": [
+            { "term": "congenital heart defect", "meddraCode": "10010331", "confidence": 0.9 },
+            { "term": "ventricular septal defect", "meddraCode": "10047297", "confidence": 0.95 }
+          ],
+          "patientInfo": { "age": 0, "gender": null }
+        },
+        "confidence": 0.85
+      },
+      "tags": ["congenital-anomaly", "first-trimester", "teratogenicity", "cardiac", "expedited"]
+    }
+  ]
+}

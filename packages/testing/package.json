@@ -1,0 +1,25 @@
+{
+  "name": "@nexus/testing",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@nexus/adapters": "workspace:*",
+    "@nexus/agent-runtime": "workspace:*",
+    "@nexus/agents": "workspace:*",
+    "@nexus/auth": "workspace:*",
+    "@nexus/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@vitest/coverage-v8": "^5.1.1",
+    "typescript": "5.9.3",
+    "vitest": "^5.1.1"
+  }
+}
