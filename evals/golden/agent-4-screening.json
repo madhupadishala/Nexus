@@ -258,6 +258,264 @@
         "confidence": 0.85
       },
       "tags": ["congenital-anomaly", "first-trimester", "teratogenicity", "cardiac", "expedited"]
+    },
+    {
+      "id": "screen-011",
+      "name": "Overdose without harm",
+      "description": "Overdose case with no clinical harm - should EXCLUDE per ICH E2D",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111121",
+        "articleTitle": "Accidental DrugH overdose in toddler: no clinical sequelae",
+        "articleAbstract": "A 2-year-old child accidentally ingested 10 tablets of DrugH (20mg each). Emergency evaluation showed normal vital signs and laboratory values. No treatment required. Child discharged after 4-hour observation with no adverse effects.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "EXCLUDE",
+        "rationale": "Overdose without any clinical adverse effect or medical intervention does not constitute a reportable ICSR per ICH E2D",
+        "extractedData": {
+          "drugs": [{ "name": "DrugH", "confidence": 0.95 }],
+          "events": [],
+          "patientInfo": { "age": 2, "gender": null }
+        },
+        "confidence": 0.88
+      },
+      "tags": ["overdose", "no-harm", "pediatric", "accidental", "observation-only"]
+    },
+    {
+      "id": "screen-012",
+      "name": "Pediatric exposure with adverse event",
+      "description": "Direct pediatric drug exposure with adverse event - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111122",
+        "articleTitle": "Stevens-Johnson syndrome in child after DrugI exposure",
+        "articleAbstract": "A 7-year-old developed Stevens-Johnson syndrome 10 days after starting DrugI for infection. Hospitalized in ICU with mucosal involvement and skin detachment affecting 15% BSA. DrugI discontinued, treated with IVIG. Slow recovery over 3 weeks.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Serious adverse event (Stevens-Johnson syndrome) in pediatric patient with temporal relationship to drug exposure is a reportable ICSR",
+        "extractedData": {
+          "drugs": [{ "name": "DrugI", "confidence": 0.95 }],
+          "events": [
+            { "term": "Stevens-Johnson syndrome", "meddraCode": "10042041", "confidence": 0.98 },
+            { "term": "mucosal involvement", "meddraCode": "10028132", "confidence": 0.85 }
+          ],
+          "patientInfo": { "age": 7, "gender": null }
+        },
+        "confidence": 0.93
+      },
+      "tags": ["pediatric", "Stevens-Johnson", "serious", "ICU", "dechallenge-positive"]
+    },
+    {
+      "id": "screen-013",
+      "name": "Elderly patient with fall after drug initiation",
+      "description": "Elderly patient fall with fracture after starting new medication - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111123",
+        "articleTitle": "Hip fracture in 85-year-old after initiating DrugJ for insomnia",
+        "articleAbstract": "An 85-year-old nursing home resident started DrugJ 5mg nightly for insomnia. Two days later, found on floor with hip fracture. DrugJ discontinued. Surgery performed. Resident had no prior falls in 6 months.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Fall with fracture in elderly patient temporally related to new sedating drug initiation constitutes suspected adverse drug reaction requiring ICSR reporting",
+        "extractedData": {
+          "drugs": [{ "name": "DrugJ", "confidence": 0.9 }],
+          "events": [
+            { "term": "fall", "meddraCode": "10016173", "confidence": 0.85 },
+            { "term": "hip fracture", "meddraCode": "10020170", "confidence": 0.95 }
+          ],
+          "patientInfo": { "age": 85, "gender": null }
+        },
+        "confidence": 0.88
+      },
+      "tags": ["elderly", "fall", "fracture", "sedative", "nursing-home", "temporal-association"]
+    },
+    {
+      "id": "screen-014",
+      "name": "Drug interaction with QT prolongation",
+      "description": "Drug-drug interaction causing QT prolongation and arrhythmia - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111124",
+        "articleTitle": "Torsades de pointes from DrugK-DrugL interaction in cardiac patient",
+        "articleAbstract": "A 65-year-old with atrial fibrillation on DrugK (antiarrhythmic) was prescribed DrugL (antibiotic). Developed syncope. ECG showed QT prolongation (520ms) and torsades de pointes. Both drugs stopped, magnesium given, rhythm normalized.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Drug-drug interaction (DrugK-DrugL) causing life-threatening arrhythmia (torsades de pointes) with QT prolongation is a serious ICSR requiring expedited reporting",
+        "extractedData": {
+          "drugs": [
+            { "name": "DrugK", "confidence": 0.95 },
+            { "name": "DrugL", "confidence": 0.95 }
+          ],
+          "events": [
+            { "term": "drug interaction", "meddraCode": "10013683", "confidence": 0.9 },
+            { "term": "torsades de pointes", "meddraCode": "10044066", "confidence": 0.98 },
+            { "term": "QT prolongation", "meddraCode": "10036893", "confidence": 0.95 },
+            { "term": "syncope", "meddraCode": "10042772", "confidence": 0.9 }
+          ],
+          "patientInfo": { "age": 65, "gender": null }
+        },
+        "confidence": 0.94
+      },
+      "tags": ["drug-interaction", "QT-prolongation", "torsades", "arrhythmia", "cardiac", "expedited"]
+    },
+    {
+      "id": "screen-015",
+      "name": "Quality defect with microbial contamination",
+      "description": "Product quality defect with microbial contamination causing infection - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111125",
+        "articleTitle": "Bacillus cereus contamination of DrugM batches causes sepsis",
+        "articleAbstract": "Investigation of DrugM intravenous solution found Bacillus cereus contamination in 3 production lots. Seven immunocompromised patients developed sepsis after infusion. Two deaths. Recall initiated.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Product quality defect (microbial contamination) causing serious infections and deaths is a critical safety signal requiring immediate ICSR reporting and recall",
+        "extractedData": {
+          "drugs": [{ "name": "DrugM", "confidence": 0.95 }],
+          "events": [
+            { "term": "product contamination microbial", "meddraCode": "10062065", "confidence": 0.95 },
+            { "term": "sepsis", "meddraCode": "10040047", "confidence": 0.95 },
+            { "term": "death", "meddraCode": "10011906", "confidence": 0.98 }
+          ],
+          "patientInfo": {}
+        },
+        "confidence": 0.96
+      },
+      "tags": ["quality-defect", "microbial-contamination", "sepsis", "death", "recall", "critical-signal"]
+    },
+    {
+      "id": "screen-016",
+      "name": "Secondary malignancy after long-term drug use",
+      "description": "Report of secondary malignancy potentially related to long-term immunosuppressant - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111126",
+        "articleTitle": "Lymphoma after 10-year DrugN therapy for rheumatoid arthritis",
+        "articleAbstract": "A 58-year-old patient developed diffuse large B-cell lymphoma after 10 years of continuous DrugN (TNF inhibitor) therapy for rheumatoid arthritis. No prior malignancy history. DrugN discontinued, oncology referral made.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Secondary malignancy (lymphoma) after long-term immunosuppressant therapy is a serious suspected adverse reaction requiring ICSR reporting per GVP Module VI",
+        "extractedData": {
+          "drugs": [{ "name": "DrugN", "confidence": 0.9 }],
+          "events": [
+            { "term": "lymphoma", "meddraCode": "10025207", "confidence": 0.95 },
+            { "term": "malignancy secondary", "meddraCode": "10063584", "confidence": 0.85 }
+          ],
+          "patientInfo": { "age": 58, "gender": null }
+        },
+        "confidence": 0.88
+      },
+      "tags": ["secondary-malignancy", "lymphoma", "immunosuppressant", "TNF-inhibitor", "long-term-use"]
+    },
+    {
+      "id": "screen-017",
+      "name": "Transmission via breast milk with infant adverse event",
+      "description": "Drug transmitted via breast milk causing infant adverse event - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111127",
+        "articleTitle": "Infantile spasms in breastfed infant exposed to DrugO via maternal milk",
+        "articleAbstract": "A 2-month-old exclusively breastfed infant developed infantile spasms. Mother was taking DrugO 400mg daily for epilepsy. EEG confirmed hypsarrhythmia. Infant spasms resolved after mother switched to DrugP and breastfeeding continued.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Serious neurological adverse event in infant exposed via breast milk is reportable per ICH E2D as exposure during lactation with clinical consequence requiring ICSR",
+        "extractedData": {
+          "drugs": [{ "name": "DrugO", "confidence": 0.9 }],
+          "events": [
+            { "term": "infantile spasms", "meddraCode": "10022015", "confidence": 0.95 },
+            { "term": "exposure via breast milk", "meddraCode": "10015725", "confidence": 0.9 }
+          ],
+          "patientInfo": { "age": 0, "gender": null }
+        },
+        "confidence": 0.9
+      },
+      "tags": ["breast-milk", "lactation", "pediatric", "infantile-spasms", "neurological", "dechallenge-positive"]
+    },
+    {
+      "id": "screen-018",
+      "name": "Congenital anomaly with teratogenicity signal",
+      "description": "Multiple congenital anomalies following first-trimester exposure - should INCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111128",
+        "articleTitle": "VACTERL association following DrugQ exposure in early pregnancy",
+        "articleAbstract": "Newborn with VACTERL association (vertebral, anal, cardiac, tracheoesophageal, renal, limb anomalies). Mother took DrugQ 10mg daily during weeks 3-8 for chronic condition. No genetic syndrome identified. DrugQ discontinued.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "INCLUDE",
+        "rationale": "Multiple congenital anomalies (VACTERL association) following first-trimester drug exposure represents potential teratogenicity signal requiring expedited ICSR reporting",
+        "extractedData": {
+          "drugs": [{ "name": "DrugQ", "confidence": 0.85 }],
+          "events": [
+            { "term": "VACTERL association", "meddraCode": "10046203", "confidence": 0.9 },
+            { "term": "congenital anomaly", "meddraCode": "10010331", "confidence": 0.95 },
+            { "term": "cardiac anomaly", "meddraCode": "10010331", "confidence": 0.9 }
+          ],
+          "patientInfo": { "age": 0, "gender": null }
+        },
+        "confidence": 0.87
+      },
+      "tags": ["congenital-anomaly", "VACTERL", "teratogenicity", "first-trimester", "multiple-anomalies", "expedited"]
+    },
+    {
+      "id": "screen-019",
+      "name": "Literature review without primary case data",
+      "description": "Review article without primary case reports - should EXCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111129",
+        "articleTitle": "Systematic review of DrugR safety profile in elderly patients",
+        "articleAbstract": "Systematic review of 45 studies evaluating DrugR safety in patients >65 years. No new primary case reports identified. Known adverse events consistent with labeling. No new safety signals.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "EXCLUDE",
+        "rationale": "Systematic review without primary individual case reports does not constitute an ICSR; no new identifiable case data for reporting",
+        "extractedData": {
+          "drugs": [{ "name": "DrugR", "confidence": 0.7 }],
+          "events": [],
+          "patientInfo": {}
+        },
+        "confidence": 0.8
+      },
+      "tags": ["literature-review", "systematic-review", "no-primary-data", "no-new-signal"]
+    },
+    {
+      "id": "screen-020",
+      "name": "Animal study without human data",
+      "description": "Preclinical animal toxicity study without human exposure - should EXCLUDE",
+      "input": {
+        "articleId": "11111111-1111-1111-1111-111111111130",
+        "articleTitle": "DrugS causes hepatocellular carcinoma in rat 2-year carcinogenicity study",
+        "articleAbstract": "Two-year carcinogenicity study in Sprague-Dawley rats showed dose-dependent increase in hepatocellular carcinoma with DrugS at 50mg/kg/day. No human exposure data. Mechanism under investigation.",
+        "searchStrategyId": "22222222-2222-2222-2222-222222222222",
+        "workspaceId": "33333333-3333-3333-3333-333333333333"
+      },
+      "expectedOutput": {
+        "decision": "EXCLUDE",
+        "rationale": "Preclinical animal study without any human exposure or clinical data does not constitute an ICSR; animal findings alone are not reportable as ICSRs",
+        "extractedData": {
+          "drugs": [{ "name": "DrugS", "confidence": 0.6 }],
+          "events": [],
+          "patientInfo": {}
+        },
+        "confidence": 0.75
+      },
+      "tags": ["animal-study", "preclinical", "carcinogenicity", "no-human-data", "rat"]
     }
   ]
 }

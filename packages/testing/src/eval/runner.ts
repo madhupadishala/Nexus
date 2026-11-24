@@ -6,7 +6,6 @@ import { testPrincipal } from '../fixtures/principals.js';
 import { createScreeningAdapter } from '@nexus/agents';
 import { ScreeningInput, ScreeningOutput } from '@nexus/adapters';
 
-// Use __dirname from Node.js instead of import.meta.url
 const repoRoot = join(__dirname, '../../../../');
 
 async function runScreeningEval() {
